@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  mysqlsrv:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "lancamentos-api"
+    ports:
+      - "3306:3306"
+    volumes:
+      - .docker:/var/lib/mysql
+    networks:
+      - lancamentos-network
+
+  adminer:
+    image: adminer
+    ports:
+      - 80:8080
+    networks:
+      - lancamentos-network
+
+networks: 
+  lancamentos-network:
+    driver: bridge
